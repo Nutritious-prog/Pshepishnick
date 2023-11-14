@@ -40,10 +40,25 @@
             android:layout_margin="10sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btn_register"
         android:text="REGISTER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    
+    <TextView
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/loginNow"
+        android:text="Already have an account? Log in!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
