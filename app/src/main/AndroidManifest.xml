@@ -6,19 +6,17 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_white"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_white"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark"
+        android:theme="@style/Theme.PshepishnickProject"
         tools:targetApi="34">
         <activity
             android:name=".Registration"
-            android:theme="@style/Theme.Material3.Dark.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:theme="@style/Theme.Material3.Dark.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

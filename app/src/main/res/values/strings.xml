@@ -4,4 +4,6 @@
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="image_description">Logo aplikacji Pshepishnick</string>
+    <string name="welcome">Witaj w aplikacji\nPSHEPISHNICK</string>
 </resources>

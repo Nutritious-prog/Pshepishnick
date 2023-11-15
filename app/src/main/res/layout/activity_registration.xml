@@ -7,10 +7,19 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15sp"
+    android:background="#F4F5F0"
     tools:context=".Registration">
 
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="300sp"
+        android:layout_height="300sp"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/image_description" />
+
     <TextView
-        android:text="@string/register"
+        android:text="@string/welcome"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -18,15 +27,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="200sp"
+        android:layout_height="1dp"
+        android:background="#BD4F6C"
+    />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:hint="@string/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10sp"/>
+            android:layout_margin="10sp"
+            android:background="@drawable/rounded_border"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -37,27 +54,35 @@
             android:hint="@string/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10sp"/>
+            android:layout_margin="10sp"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_border"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:progressBackgroundTint="@color/red"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register"
-        android:text="REGISTER"
+        android:text="ZAREJESTRUJ SIĘ"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/red"
+        app:cornerRadius="20dp"
+        android:layout_marginTop="15sp"
+        />
     
     <TextView
         android:textSize="13sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:id="@+id/loginNow"
-        android:text="Already have an account? Log in!"
+        android:text="Posiadasz już konto? Zaloguj się!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
