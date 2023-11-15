@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -63,18 +64,21 @@ public class Registration extends AppCompatActivity {
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email, password;
 
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
 
-                if (email.isEmpty()) {
-                    Toast.makeText(Registration.this, "Please, enter email", Toast.LENGTH_SHORT).show();
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextEmail.setError("Invalid email address");
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
 
-                if (password.isEmpty()) {
-                    Toast.makeText(Registration.this, "Please, enter password", Toast.LENGTH_SHORT).show();
+                if (password.length() < 6) {
+                    editTextPassword.setError("Password must contain min. 6 characters");
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
 
@@ -83,7 +87,6 @@ public class Registration extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    progressBar.setVisibility(View.VISIBLE);
                                     // Sign in success, update UI with the signed-in user's information
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -94,6 +97,7 @@ public class Registration extends AppCompatActivity {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(Registration.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.GONE);
                                 }
                             }
                         });

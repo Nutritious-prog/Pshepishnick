@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -68,14 +69,15 @@ public class Login extends AppCompatActivity {
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
 
-                if (email.isEmpty()) {
-                    Toast.makeText(Login.this, "Please, enter email", Toast.LENGTH_SHORT).show();
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextEmail.setError("Invalid email address");
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
 
-                if (password.isEmpty()) {
-                    Toast.makeText(Login.this, "Please, enter password", Toast.LENGTH_SHORT).show();
+                if (password.length() < 6) {
+                    editTextPassword.setError("Password must contain min. 6 characters");
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
