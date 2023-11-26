@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_user_profile" >
         <action
             android:id="@+id/action_userProfile_to_recipiesList"
-            app:destination="@id/recipiesList" />
+            app:destination="@id/recipiesList"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_userProfile_to_addRecipe"
+            app:destination="@id/addRecipe"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/recipiesList"
@@ -21,6 +28,29 @@
         tools:layout="@layout/fragment_recipies_list" >
         <action
             android:id="@+id/action_recipiesList_to_userProfile"
-            app:destination="@id/userProfile" />
+            app:destination="@id/userProfile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_recipiesList_to_addRecipe"
+            app:destination="@id/addRecipe"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipe"
+        android:name="com.example.pshepishnickproject.addRecipe"
+        android:label="fragment_add_recipe"
+        tools:layout="@layout/fragment_add_recipe" >
+        <action
+            android:id="@+id/action_addRecipe_to_userProfile2"
+            app:destination="@id/userProfile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_addRecipe_to_recipiesList2"
+            app:destination="@id/recipiesList"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>

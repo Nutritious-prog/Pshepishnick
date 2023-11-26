@@ -1,26 +1,19 @@
 package com.example.pshepishnickproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link userProfile#newInstance} factory method to
+ * Use the {@link addRecipe#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class userProfile extends Fragment {
+public class addRecipe extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +24,7 @@ public class userProfile extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public userProfile() {
+    public addRecipe() {
         // Required empty public constructor
     }
 
@@ -41,11 +34,11 @@ public class userProfile extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment userProfile.
+     * @return A new instance of fragment addRecipe.
      */
     // TODO: Rename and change types and number of parameters
-    public static userProfile newInstance(String param1, String param2) {
-        userProfile fragment = new userProfile();
+    public static addRecipe newInstance(String param1, String param2) {
+        addRecipe fragment = new addRecipe();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,11 +58,7 @@ public class userProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
-
-        view.findViewById(R.id.textView2).setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_userProfile_to_recipiesList));
-
         // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_add_recipe, container, false);
     }
 }
