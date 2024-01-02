@@ -62,9 +62,11 @@ public class addRecipe extends Fragment {
 
 
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivity(intent);
     }
-
     private void saveRecipe() {
         String title = etTitle.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
