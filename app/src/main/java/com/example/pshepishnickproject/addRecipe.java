@@ -2,6 +2,7 @@ package com.example.pshepishnickproject;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,6 +31,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +44,7 @@ public class addRecipe extends Fragment {
 
     private TextInputEditText etTitle, etDescription, etDuration, etDifficulty;
     private ImageView ivSelectedPhoto;
-    private Uri selectedImageUri;
+    private String selectedImageUri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,13 +65,57 @@ public class addRecipe extends Fragment {
         return view;
     }
 
+    // Declare a variable for the ActivityResultLauncher
+    private final ActivityResultLauncher<Intent> galleryLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null && data.getData() != null) {
+                                Uri selectedImageUri = data.getData();
+                                uploadImageToFirebaseStorage(selectedImageUri);
+                            }
+                        }
+                    });
 
+    // Inside your openGallery() method or wherever you trigger the gallery intent
     private void openGallery() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivity(intent);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryLauncher.launch(intent);
     }
+
+
+//    private void openGallery() {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivity(intent);
+//    }
+
+    private void uploadImageToFirebaseStorage(Uri imageUri) {
+        if (imageUri != null) {
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference imagesRef = storageRef.child("images/" + UUID.randomUUID().toString());
+
+            imagesRef.putFile(imageUri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // Image uploaded successfully
+                        // Now, you can get the download URL and save it in Firestore
+                        imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String downloadUrl = uri.toString();
+                            // Save this downloadUrl in your Firestore recipe document
+                            // You can update your Firestore document with the downloadUrl.
+                            // Call a method to save the recipe with the downloadUrl.
+                            selectedImageUri = downloadUrl;
+                        });
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle failure
+                        Log.e("AddRecipeFragment", "Error uploading image to Firebase Storage", e);
+                    });
+        }
+    }
+
     private void saveRecipe() {
         String title = etTitle.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
@@ -84,7 +133,7 @@ public class addRecipe extends Fragment {
         int difficulty = Integer.parseInt(difficultyStr);
 
         // Now, you have all the necessary data to create a Recipe object and save it to Firestore
-        Recipe recipe = new Recipe(title, description, duration, difficulty, "dummy");
+        Recipe recipe = new Recipe(title, description, duration, difficulty, selectedImageUri);
 
         System.out.println(recipe);
 

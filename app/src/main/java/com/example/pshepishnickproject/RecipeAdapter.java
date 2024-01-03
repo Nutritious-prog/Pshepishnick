@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
@@ -40,25 +42,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titleTextView;
-        private TextView descriptionTextView;
+        private TextView timeTextView;
         private TextView difficultyTextView;
         private ImageView photoImageView;
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
-            descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
+            timeTextView = itemView.findViewById(R.id.timeTextView);
             difficultyTextView = itemView.findViewById(R.id.difficultyTextView);
             photoImageView = itemView.findViewById(R.id.photoImageView);
         }
 
         public void bind(Recipe recipe) {
             titleTextView.setText(recipe.getTitle());
-            descriptionTextView.setText(recipe.getDescription());
+            timeTextView.setText("Time: " + recipe.getPreparationDuration());
             difficultyTextView.setText("Difficulty: " + recipe.getDifficulty());
             // Load the photo using your preferred image loading library (e.g., Glide, Picasso)
             // Example using Glide:
-            // Glide.with(itemView.getContext()).load(recipe.getPhotoUrl()).into(photoImageView);
+            Glide.with(itemView.getContext()).load(recipe.getPhotoUrl()).into(photoImageView);
         }
     }
 }

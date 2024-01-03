@@ -67,8 +67,6 @@ public class userProfile extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
-        view.findViewById(R.id.textView2).setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_userProfile_to_recipesList));
-
         // Inflate the layout for this fragment
         return view;
     }
