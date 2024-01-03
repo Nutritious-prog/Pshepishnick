@@ -95,8 +95,10 @@ public class addRecipe extends Fragment {
     private void uploadImageToFirebaseStorage(Uri imageUri) {
         if (imageUri != null) {
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference imagesRef = storageRef.child("images/" + UUID.randomUUID().toString());
-
+            String path = "images/" + UUID.randomUUID().toString();
+            StorageReference imagesRef = storageRef.child(path);
+            System.out.println("ImgRef" + imagesRef);
+            System.out.println("path" + path);
             imagesRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
                         // Image uploaded successfully
@@ -133,6 +135,7 @@ public class addRecipe extends Fragment {
         int difficulty = Integer.parseInt(difficultyStr);
 
         // Now, you have all the necessary data to create a Recipe object and save it to Firestore
+        System.out.println(selectedImageUri);
         Recipe recipe = new Recipe(title, description, duration, difficulty, selectedImageUri);
 
         System.out.println(recipe);
