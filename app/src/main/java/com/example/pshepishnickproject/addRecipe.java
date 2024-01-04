@@ -48,7 +48,7 @@ public class addRecipe extends Fragment {
     private ImageView ivSelectedPhoto;
     private String selectedImageUri;
 
-    TextView tvSelectedPhotoName;
+    private TextView tvSelectedPhotoName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -136,6 +136,8 @@ public class addRecipe extends Fragment {
         }
     }
 
+
+
     private void saveRecipe() {
         String title = etTitle.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
@@ -144,7 +146,7 @@ public class addRecipe extends Fragment {
 
         // Validation: Ensure that required fields are not empty
         if (title.isEmpty() || description.isEmpty() || durationStr.isEmpty() || difficultyStr.isEmpty()) {
-            // Handle empty fields (show a Toast, Snackbar, or other feedback)
+            showToast("All fields are required!");
             return;
         }
 
@@ -161,6 +163,21 @@ public class addRecipe extends Fragment {
 
         // You can now save the recipe to Firestore and upload the image to Firebase Storage
         saveRecipeToFirestore(recipe);
+        clearForm();
+    }
+
+    private void clearForm() {
+        // Clear the EditText fields
+        etTitle.getText().clear();
+        etDescription.getText().clear();
+        etDuration.getText().clear();
+        etDifficulty.getText().clear();
+
+        // Hide the selected photo
+        tvSelectedPhotoName.setVisibility(View.GONE);
+
+        // Clear the selectedImageUri
+        selectedImageUri = null;
     }
 
 
@@ -182,13 +199,19 @@ public class addRecipe extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        showToast("Recipe uploaded successfully!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        showToast("Failed to upload recipe. Please try again.");
                     }
                 });
 
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
