@@ -4,9 +4,11 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,8 @@ public class addRecipe extends Fragment {
     private ImageView ivSelectedPhoto;
     private String selectedImageUri;
 
+    TextView tvSelectedPhotoName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_recipe, container, false);
@@ -55,6 +59,7 @@ public class addRecipe extends Fragment {
         etDuration = view.findViewById(R.id.etDuration);
         etDifficulty = view.findViewById(R.id.etDifficulty);
         ivSelectedPhoto = view.findViewById(R.id.ivSelectedPhoto);
+        tvSelectedPhotoName = view.findViewById(R.id.tvSelectedPhotoName);
 
         Button btnSelectPhoto = view.findViewById(R.id.btnSelectPhoto);
         Button btnSaveRecipe = view.findViewById(R.id.btnSaveRecipe);
@@ -73,24 +78,42 @@ public class addRecipe extends Fragment {
                             Intent data = result.getData();
                             if (data != null && data.getData() != null) {
                                 Uri selectedImageUri = data.getData();
+                                // Retrieve the file name from the content resolver
+                                String photoName = getFileName(selectedImageUri);
+
+                                // Update the TextView with the selected photo name
+                                tvSelectedPhotoName.setText("Selected Photo: " + photoName);
+                                tvSelectedPhotoName.setVisibility(View.VISIBLE);
+
                                 uploadImageToFirebaseStorage(selectedImageUri);
                             }
                         }
                     });
+
+    // Function to get the file name from the content resolver
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = requireContext().getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (index != -1) {
+                        result = cursor.getString(index);
+                    }
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getLastPathSegment();
+        }
+        return result;
+    }
 
     // Inside your openGallery() method or wherever you trigger the gallery intent
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryLauncher.launch(intent);
     }
-
-
-//    private void openGallery() {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivity(intent);
-//    }
 
     private void uploadImageToFirebaseStorage(Uri imageUri) {
         if (imageUri != null) {
@@ -101,13 +124,8 @@ public class addRecipe extends Fragment {
             System.out.println("path" + path);
             imagesRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // Image uploaded successfully
-                        // Now, you can get the download URL and save it in Firestore
                         imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
                             String downloadUrl = uri.toString();
-                            // Save this downloadUrl in your Firestore recipe document
-                            // You can update your Firestore document with the downloadUrl.
-                            // Call a method to save the recipe with the downloadUrl.
                             selectedImageUri = downloadUrl;
                         });
                     })

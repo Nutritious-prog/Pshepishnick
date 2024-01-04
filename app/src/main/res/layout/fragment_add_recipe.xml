@@ -100,6 +100,16 @@
                 android:scaleType="centerCrop"
                 android:visibility="gone" />
 
+            <!-- Text View to display the selected photo's name -->
+            <TextView
+                android:id="@+id/tvSelectedPhotoName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivSelectedPhoto"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:text="Selected Photo: " />
+
             <!-- Save Button -->
             <Button
                 android:id="@+id/btnSaveRecipe"
