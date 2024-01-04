@@ -78,12 +78,12 @@
         />
 
     <TextView
-        android:textSize="13sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
         android:id="@+id/registerNow"
-        android:text="Nie posiadasz jeszcze konta? Zarejestruj się!"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Nie posiadasz jeszcze konta? Zarejestruj się!"
+        android:textSize="13sp" />
 
 </LinearLayout>
