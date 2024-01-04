@@ -45,7 +45,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Recipe Description"
                     android:inputType="textMultiLine"
-                    android:maxLines="3" />
+                    android:maxLines="10"
+                    android:minLines="5" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Preparation Duration -->
