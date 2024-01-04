@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
-    private List<Recipe> recipes;
+    private List<Recipe> allRecipes;
+    private List<Recipe> displayedRecipes;
 
-    public RecipeAdapter(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public RecipeAdapter(List<Recipe> allRecipes) {
+        this.allRecipes = allRecipes;
+        this.displayedRecipes = new ArrayList<>(allRecipes);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -30,13 +34,33 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
-        Recipe recipe = recipes.get(position);
+        Recipe recipe = displayedRecipes.get(position);
         holder.bind(recipe);
     }
 
     @Override
     public int getItemCount() {
-        return recipes.size();
+        return displayedRecipes.size();
+    }
+
+    public void filter(String query) {
+        if (allRecipes == null || allRecipes.isEmpty()) {
+            return;
+        }
+
+        displayedRecipes.clear();
+
+        if (query.isEmpty()) {
+            displayedRecipes.addAll(allRecipes);
+        } else {
+            String lowercaseQuery = query.toLowerCase();
+            for (Recipe recipe : allRecipes) {
+                if (recipe.getTitle().toLowerCase().contains(lowercaseQuery)) {
+                    displayedRecipes.add(recipe);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
