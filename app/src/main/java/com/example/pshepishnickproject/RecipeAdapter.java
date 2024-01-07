@@ -80,10 +80,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         public void bind(Recipe recipe) {
             titleTextView.setText(recipe.getTitle());
-            timeTextView.setText("Time: " + recipe.getPreparationDuration());
+            timeTextView.setText("Time: " + recipe.getPreparationDuration() + " min");
             difficultyTextView.setText("Difficulty: " + recipe.getDifficulty());
-            // Load the photo using your preferred image loading library (e.g., Glide, Picasso)
-            // Example using Glide:
             Glide.with(itemView.getContext()).load(recipe.getPhotoUrl()).into(photoImageView);
         }
     }
