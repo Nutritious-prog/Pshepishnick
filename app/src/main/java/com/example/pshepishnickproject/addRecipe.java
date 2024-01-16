@@ -31,6 +31,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,6 +51,8 @@ public class addRecipe extends Fragment {
     private String selectedImageUri;
 
     private TextView tvSelectedPhotoName;
+
+    FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -183,6 +187,7 @@ public class addRecipe extends Fragment {
 
     private void saveRecipeToFirestore(Recipe recipe) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         // Create a new user with a first and last name
         Map<String, Object> recipeMap = new HashMap<>();
@@ -191,7 +196,7 @@ public class addRecipe extends Fragment {
         recipeMap.put("difficulty", recipe.getDifficulty());
         recipeMap.put("preparationDuration", recipe.getPreparationDuration());
         recipeMap.put("photoUrl", recipe.getPhotoUrl());
-        recipeMap.put("ownerID", "narazieBrakID");
+        recipeMap.put("ownerID", currentUser.getUid());
 
 // Add a new document with a generated ID
         db.collection("recipes")
