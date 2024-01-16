@@ -65,6 +65,8 @@ public class addRecipe extends Fragment {
         ivSelectedPhoto = view.findViewById(R.id.ivSelectedPhoto);
         tvSelectedPhotoName = view.findViewById(R.id.tvSelectedPhotoName);
 
+        mAuth = FirebaseAuth.getInstance();
+
         Button btnSelectPhoto = view.findViewById(R.id.btnSelectPhoto);
         Button btnSaveRecipe = view.findViewById(R.id.btnSaveRecipe);
 
