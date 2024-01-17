@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_userProfile_to_recipesList"
             app:destination="@id/recipesList" />
+        <action
+            android:id="@+id/action_userProfile_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
     </fragment>
     <fragment
         android:id="@+id/addRecipe"
@@ -43,6 +46,20 @@
             app:destination="@id/addRecipe" />
         <action
             android:id="@+id/action_recipesList_to_userProfile"
+            app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_recipesList_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetails"
+        android:name="com.example.pshepishnickproject.RecipeDetails"
+        android:label="RecipeDetails" >
+        <action
+            android:id="@+id/action_recipeDetails_to_recipesList"
+            app:destination="@id/recipesList" />
+        <action
+            android:id="@+id/action_recipeDetails_to_userProfile"
             app:destination="@id/userProfile" />
     </fragment>
 </navigation>

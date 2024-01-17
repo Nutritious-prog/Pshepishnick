@@ -1,5 +1,6 @@
 package com.example.pshepishnickproject;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +38,23 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe recipe = displayedRecipes.get(position);
         holder.bind(recipe);
+
+        holder.itemView.setOnClickListener(v -> {
+            openRecipeDetailFragment(recipe, holder);
+        });
+    }
+
+    private void openRecipeDetailFragment(Recipe recipe, @NonNull RecipeViewHolder holder) {
+        // Create a Bundle to pass data to RecipeDetailFragment
+        Bundle bundle = new Bundle();
+        bundle.putString("recipeTitle", recipe.getTitle());
+        bundle.putString("recipeDescription", recipe.getDescription());
+        bundle.putInt("recipeTime", recipe.getPreparationDuration());
+        bundle.putInt("recipeDiff", recipe.getDifficulty());
+        bundle.putString("recipePhoto", recipe.getPhotoUrl());
+
+        // Navigate to RecipeDetailFragment
+        Navigation.findNavController(holder.itemView).navigate(R.id.action_recipesList_to_recipeDetails, bundle);
     }
 
     @Override

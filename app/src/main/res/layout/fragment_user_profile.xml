@@ -30,10 +30,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logoutButton"
+        android:layout_marginTop="27dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Your recipes" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/logoutButton"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="82dp" />
 </RelativeLayout>

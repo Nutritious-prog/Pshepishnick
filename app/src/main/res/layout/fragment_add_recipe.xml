@@ -14,6 +14,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logoutButton"
+                android:layout_marginTop="27dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Provide your recipe here!" />
+
             <!-- Recipe Title -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilTitle"
