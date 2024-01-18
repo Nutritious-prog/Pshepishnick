@@ -7,11 +7,11 @@
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:text="Welcome to Pshepisnick"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/emailTextView"

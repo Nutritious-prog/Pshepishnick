@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,8 +55,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         bundle.putInt("recipeDiff", recipe.getDifficulty());
         bundle.putString("recipePhoto", recipe.getPhotoUrl());
 
-        // Navigate to RecipeDetailFragment
-        Navigation.findNavController(holder.itemView).navigate(R.id.action_recipesList_to_recipeDetails, bundle);
+        // Check the current destination
+        NavController navController = Navigation.findNavController(holder.itemView);
+        NavDestination currentDestination = navController.getCurrentDestination();
+
+        // Check if the current destination is userProfile
+        if (currentDestination != null && currentDestination.getId() == R.id.userProfile) {
+            // Navigate to RecipeDetailFragment using the userProfile action
+            navController.navigate(R.id.action_userProfile_to_recipeDetails, bundle);
+        } else {
+            // Navigate to RecipeDetailFragment using the RecipeList action
+            navController.navigate(R.id.action_recipesList_to_recipeDetails, bundle);
+        }
     }
 
     @Override
