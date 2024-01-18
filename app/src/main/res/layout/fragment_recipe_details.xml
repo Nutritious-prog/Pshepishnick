@@ -14,7 +14,8 @@
             android:id="@+id/photoImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="A photo of a recipe"/>
 
         <!-- Time and Difficulty -->
         <LinearLayout
@@ -75,6 +76,7 @@
             android:text="Back"
             android:layout_below="@id/recipeDetailsLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:contentDescription="Button to go back to main page."/>
     </RelativeLayout>
 </ScrollView>

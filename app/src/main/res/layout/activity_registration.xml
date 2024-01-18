@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
-            android:background="@drawable/rounded_border"/>
+            android:background="@drawable/rounded_border" />
+<!--            android:contentDescription="Input for email."/>-->
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,6 +58,8 @@
             android:layout_margin="10sp"
             android:inputType="textPassword"
             android:background="@drawable/rounded_border"/>
+<!--            android:contentDescription="Input for password."-->
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
@@ -68,13 +71,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register"
-        android:text="ZAREJESTRUJ SIĘ"
+        android:text="REGISTER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:backgroundTint="@color/red"
         app:cornerRadius="20dp"
         android:layout_marginTop="15sp"
+        android:contentDescription="Button to register."
         />
     
     <TextView
@@ -82,7 +86,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:id="@+id/loginNow"
-        android:text="Posiadasz już konto? Zaloguj się!"
+        android:text="Already have an account? Log in!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -31,7 +31,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:contentDescription="Input for recipe title.">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitle"
@@ -48,7 +49,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:contentDescription="Input for recipe description.">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescription"
@@ -66,7 +68,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:contentDescription="Input for preparation duration.">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDuration"
@@ -83,7 +86,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:contentDescription="Input for difficulty.">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDifficulty"
@@ -100,7 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Select Photo" />
+                android:text="Select Photo"
+                android:contentDescription="Button to select a photo."/>
 
             <!-- Display Selected Photo -->
             <ImageView
@@ -127,7 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Save Recipe" />
+                android:text="Save Recipe"
+                android:contentDescription="Butto to save a recipe."/>
         </LinearLayout>
     </ScrollView>
 

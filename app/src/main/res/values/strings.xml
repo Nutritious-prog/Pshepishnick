@@ -4,8 +4,8 @@
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="image_description">Logo aplikacji Pshepishnick</string>
-    <string name="welcome">Witaj w aplikacji\nPSHEPISHNICK</string>
+    <string name="image_description">App logo of Pshepishnick</string>
+    <string name="welcome">Welcome to our app\nPSHEPISHNICK</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:contentDescription="A photo of a recipe"/>
 
     <TextView
         android:id="@+id/titleTextView"

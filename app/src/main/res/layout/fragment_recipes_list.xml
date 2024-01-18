@@ -15,7 +15,8 @@
         android:queryHint="Search for recipes"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_border"/>
+        android:background="@drawable/rounded_border"
+        android:contentDescription="Search bar to search for recipes."/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
