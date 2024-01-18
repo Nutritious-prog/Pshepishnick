@@ -39,6 +39,71 @@ To use Pshepishnick on your Android device, follow these steps:
 
 3. Build and run the app on your Android device or emulator.
 
+## Firebase Setup
+
+Pshepishnick uses Firebase Firestore for storing recipe data and Firebase Storage for handling recipe images. Follow these steps to set up Firebase for your Pshepishnick app:
+
+### Step 1: Create a Firebase Project
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Click on "Add Project" and follow the setup instructions.
+
+### Step 2: Set up Firebase Firestore
+
+1. In the Firebase Console, navigate to your project.
+2. Click on "Firestore Database" in the left-hand menu.
+3. Click "Create Database" and choose "Start in test mode" (for now, you can adjust security rules later).
+4. Select the appropriate region for your database.
+
+## Firebase Firestore Schema
+
+Pshepishnick uses Firebase Firestore to store recipe data. Follow these steps to set up the Firestore schema for the `Recipe` class:
+
+### Step 1: Define the Recipe Class
+
+In your Android Studio project, you have a `Recipe` class representing the structure of a recipe. Make sure this class has the necessary fields such as `title`, `description`, `preparationDuration`, `difficulty`, and `photoUrl`. This class corresponds to the data you want to store for each recipe.
+
+Here's a simplified example of the `Recipe` class:
+
+```java
+public class Recipe {
+    private String title;
+    private String description;
+    private int preparationDuration;
+    private int difficulty;
+    private String photoUrl;
+
+    // Constructors, getters, and setters
+}
+```
+### Step 3: Set up Firebase Storage
+
+1. In the Firebase Console, navigate to your project.
+2. Click on "Storage" in the left-hand menu.
+3. Click "Get Started" and follow the setup instructions.
+4. Set the default security rules to allow read and write access (you can adjust them based on your app's security needs).
+
+### Step 4: Obtain Firebase Configurations
+
+1. In the Firebase Console, navigate to your project.
+2. Click on the gear icon (Project settings) in the top-left corner.
+3. Under the "General" tab, scroll down to the "Your apps" section.
+4. Click on the Firebase SDK snippet and select "Config."
+5. Copy the configurations (apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId).
+
+### Step 5: Integrate Firebase Configurations in Your App
+
+1. Open your Pshepishnick Android Studio project.
+2. Navigate to the `app` directory and create a new file named `google-services.json`.
+3. Paste the copied Firebase configurations into this file.
+
+Now, your Pshepishnick app is connected to Firebase Firestore and Storage. You can start using these services to store and retrieve recipe data along with associated images.
+
+**Note:** Ensure that you handle sensitive information, such as API keys and configurations, securely and avoid exposing them publicly.
+
+For more details on integrating Firebase with Android, refer to the [Firebase documentation](https://firebase.google.com/docs/android/setup).
+
+
 ## Usage
 
 1. Launch the Pshepishnick app on your Android device.
